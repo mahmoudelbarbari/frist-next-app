@@ -6,7 +6,7 @@ export function dbConnection() {
       console.log("connected to db successfuly");
     });
   } catch (err) {
-    console.error("❌ MongoDB connection error:", err);
+    console.error("MongoDB connection error:", err);
     throw err;
   }
 }

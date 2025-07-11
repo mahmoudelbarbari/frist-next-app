@@ -21,7 +21,7 @@ export default async function UserPage({ params }) {
     <div className="m-auto">
       <h1>User Details</h1>
       <p>
-        <strong>ID:</strong> {user.id}
+        <strong>ID:</strong> {user._id}
       </p>
       <p>
         <strong>Name:</strong> {user.name}

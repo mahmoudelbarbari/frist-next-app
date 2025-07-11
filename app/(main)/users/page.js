@@ -9,7 +9,7 @@ export const metadata = {
 export default async function page() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/users`);
   const data = await res.json();
-
+  console.log(data);
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">User Directory</h1>
@@ -21,7 +21,7 @@ export default async function page() {
       </Link>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-5">
         {data.map((user) => (
-          <Link href={`/users/${user.id}`}>
+          <Link href={`/users/${user._id}`} key={user._id}>
             <div className="bg-white shadow-md rounded-2xl p-5 border border-gray-100 hover:shadow-lg transition duration-300">
               <h2 className="text-xl font-semibold text-gray-800 mb-2">
                 {user.name}
