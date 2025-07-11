@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 export function dbConnection() {
-  mongoose
-    .connect("mongodb://127.0.0.1:27017/nextfirst")
-    .then(() => {
+  try {
+    mongoose.connect(process.env.DB_URL).then(() => {
       console.log("connected to db successfuly");
-    })
-    .catch((err) => {
-      console.log(err);
     });
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err);
+    throw err;
+  }
 }

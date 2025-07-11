@@ -1,10 +1,9 @@
 import { dbConnection } from "@/app/_lib/dbConnection";
 import todosModel from "@/app/_lib/schema/todos";
 
-dbConnection();
-
 export async function GET() {
   try {
+    await dbConnection();
     const todos = await todosModel.find();
     return new Response(JSON.stringify(todos), { status: 200 });
   } catch (err) {
@@ -15,18 +14,17 @@ export async function GET() {
 }
 
 export async function POST(request) {
-  await dbConnection();
-
   try {
-    const body = await request.json();
+    await dbConnection();
+    const todo = await request.json();
 
-    if (!body.name || typeof body.name !== "string") {
+    if (!todo.name || typeof todo.name !== "string") {
       return Response.json({ error: "name is required" }, { status: 400 });
     }
 
     const newTodo = await todosModel.create({
-      name: body.name,
-      status: body.status || "todo",
+      name: todo.name,
+      status: todo.status || "todo",
     });
 
     return Response.json(newTodo, { status: 201 });
